@@ -13,19 +13,39 @@ const docs = (await getCollection('docs')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
+// ヒーローのスペックチップ（3-in-1 Portable CNC の主要スペック）
+const specChips = [
+  { value: '約4kg', unit: '9 lb', label: '持ち運べる軽さ' },
+  { value: "4'×8'", unit: '1220×2440mm', label: '大判の加工エリア' },
+  { value: '1.2in', unit: '約30mm', label: '切削深さ' },
+];
+
 const features = [
   {
-    title: '国産CNCルーター',
-    text: '国内で設計・サポートされるCNCルーター。導入からメンテナンスまで、日本語で一貫して伴走します。',
+    no: '01',
+    title: '3-in-1、これ一台で。',
+    text: '切削・彫刻・彫り込みをワンマシンで。刃と設定を替えるだけで、看板づくりから精密な部品加工まで守備範囲が広がります。',
   },
   {
-    title: '教育機関にフィットする設計',
-    text: '安全カバーや操作パネルなど、はじめて機械に触れる生徒・学生でも扱いやすい構成。導入校のカリキュラムづくりも支援します。',
+    no: '02',
+    title: '現場に、持ち出せる。',
+    text: '約4kgのポータブル設計。Makita 18V充電式ルーターで駆動するため、電源のない場所や教室の机の上でも動かせます。',
   },
   {
-    title: '設計から加工まで一気通貫',
-    text: 'CADデータの作成から切削加工まで、授業や工房のワークフローに合わせたソフトウェア環境を提案します。',
+    no: '03',
+    title: '教室に、ちょうどいい。',
+    text: '教育向けエディション「GORDIX STUDENT」を用意。はじめて機械に触れる生徒でも扱いやすい安全設計と、授業用の教材が揃います。',
   },
+];
+
+// 主なスペック（3-in-1 Portable CNC）※製品構成により異なる場合あり
+const specs = [
+  { dt: '加工モード', dd: '3-in-1（切削 / 彫刻 / 彫り込み）' },
+  { dt: '加工エリア', dd: "4' × 8'（約 1,220 × 2,440 mm）" },
+  { dt: '切削深さ', dd: '最大 1.2 in（約 30 mm）' },
+  { dt: '重量', dd: '約 4 kg（9 lb）' },
+  { dt: '駆動', dd: 'Makita 18V 充電式ルーター対応（コードレス）' },
+  { dt: '対応素材', dd: '木材・合板・MDF・アクリル 等' },
 ];
 
 // 導入事例・お知らせはダミー。正式運用時に差し替え
@@ -52,29 +72,43 @@ const cases = [
 ---
 
 <BaseLayout
-  title="GORDIX｜国産CNCルーター普及事業 - KIILA株式会社"
-  description="GORDIXは教育機関向けを中心とした国産CNCルーターです。KIILA株式会社は導入支援・ドキュメント整備・コミュニティ運営を通じてGORDIXの普及を進めています。"
+  theme="dark"
+  title="GORDIX｜3-in-1 ポータブルCNC - KIILA株式会社"
+  description="GORDIXは、切削・彫刻・彫り込みを1台でこなす3-in-1のポータブルCNCです。約4kg・充電式ルーター駆動で、教育機関の教室から工房まで。KIILAが導入支援・ドキュメント整備・コミュニティ運営で普及を進めます。"
 >
   <!-- ヒーロー -->
   <section class="gordix-hero">
     <div class="container gordix-hero-inner">
-      <div>
-        <p class="section-eyebrow">GORDIX — CNC Router</p>
+      <div class="gordix-hero-copy">
+        <img class="gordix-logo" src={withBase('/images/gordix/gordix-logo.svg')} alt="GORDIX" />
+        <p class="gordix-badge">3-in-1 PORTABLE CNC</p>
         <h1 class="gordix-hero-title">
-          教室から工房まで。<br />
-          <span>削る</span>を、みんなのものに。
+          <span class="accent">削る</span>を、<br />
+          机の上に。
         </h1>
         <p class="gordix-hero-lead">
-          GORDIXは、教育機関向けを中心に展開する国産CNCルーターです。
-          KIILAは導入支援・ノウハウの整備・コミュニティ運営を通じて、
-          デジタルものづくりのすそ野を広げていきます。
+          切削・彫刻・彫り込みを1台で。約4kgのポータブルCNC「GORDIX」が、
+          教室から工房まで、デジタルものづくりのすそ野を広げます。
         </p>
+        <div class="spec-chips">
+          {
+            specChips.map((c) => (
+              <div class="spec-chip">
+                <span class="spec-chip-value">{c.value}</span>
+                <span class="spec-chip-unit">{c.unit}</span>
+                <span class="spec-chip-label">{c.label}</span>
+              </div>
+            ))
+          }
+        </div>
         <div class="gordix-hero-buttons">
           <a class="btn" href="#contact">導入相談・資料請求</a>
           <a class="btn btn-outline" href="#docs">ドキュメントを見る</a>
         </div>
       </div>
-      <img src={withBase('/images/gordix/hero.png')} alt="CNCルーターGORDIX" />
+      <div class="gordix-hero-visual">
+        <img src={withBase('/images/gordix/hero.png')} alt="3-in-1 ポータブルCNC GORDIX" />
+      </div>
     </div>
   </section>
 
@@ -85,9 +119,9 @@ const cases = [
       <h2 class="section-title">GORDIXの特徴</h2>
       <div class="feature-grid">
         {
-          features.map((f, i) => (
+          features.map((f) => (
             <div class="card feature-card">
-              <p class="feature-number">0{i + 1}</p>
+              <p class="feature-number">{f.no}</p>
               <h3>{f.title}</h3>
               <p class="feature-text">{f.text}</p>
             </div>
@@ -97,14 +131,18 @@ const cases = [
       <div class="machine-grid">
         <img src={withBase('/images/gordix/machine.png')} alt="GORDIX本体" />
         <div>
-          <h3 class="machine-title">主な仕様（参考値・ダミー）</h3>
+          <h3 class="machine-title">主なスペック</h3>
           <dl class="spec-list">
-            <div><dt>加工エリア</dt><dd>900 × 600 × 100 mm</dd></div>
-            <div><dt>対応素材</dt><dd>木材・合板・MDF・樹脂 など</dd></div>
-            <div><dt>制御ソフト</dt><dd>専用CAM＋汎用Gコード対応</dd></div>
-            <div><dt>安全機構</dt><dd>全面カバー・非常停止ボタン</dd></div>
-            <div><dt>設置</dt><dd>100V電源対応・搬入設置サポートあり</dd></div>
+            {
+              specs.map((s) => (
+                <div>
+                  <dt>{s.dt}</dt>
+                  <dd>{s.dd}</dd>
+                </div>
+              ))
+            }
           </dl>
+          <p class="spec-note">※ 仕様は製品構成により異なる場合があります。</p>
         </div>
       </div>
     </div>
@@ -137,11 +175,11 @@ const cases = [
     </div>
   </section>
 
-  <!-- 教育機関向けプログラム -->
+  <!-- 教育機関向けプログラム（GORDIX STUDENT） -->
   <section class="section" id="education">
     <div class="container edu-grid">
       <div>
-        <p class="section-eyebrow">For Education</p>
+        <p class="section-eyebrow">GORDIX STUDENT</p>
         <h2 class="section-title">教育機関向け導入プログラム</h2>
         <p class="edu-lead">
           「つくりたい」を、カリキュラムに。探究学習・ものづくり教育の現場で、
@@ -246,32 +284,106 @@ const cases = [
 <style>
   /* ---------- ヒーロー ---------- */
   .gordix-hero {
-    background: linear-gradient(135deg, #fdfcf9 0%, var(--bg) 60%, var(--bg-soft) 100%);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 80% at 78% 30%, rgba(238, 119, 51, 0.16) 0%, rgba(238, 119, 51, 0) 55%),
+      linear-gradient(135deg, #1b2026 0%, #131619 55%, #0d1013 100%);
+  }
+
+  /* 上端にオレンジのアクセントライン */
+  .gordix-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green) 0%, rgba(238, 119, 51, 0) 60%);
   }
 
   .gordix-hero-inner {
+    position: relative;
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
     gap: 56px;
     padding-block: 88px;
   }
 
+  .gordix-logo {
+    width: 168px;
+    height: auto;
+    margin-bottom: 24px;
+  }
+
+  .gordix-badge {
+    display: inline-block;
+    font-family: var(--font-en);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--green);
+    border: 1px solid rgba(238, 119, 51, 0.5);
+    border-radius: 3px;
+    padding: 5px 12px;
+    margin-bottom: 22px;
+  }
+
   .gordix-hero-title {
-    font-size: clamp(30px, 3.2vw, 40px);
+    font-size: clamp(34px, 4vw, 52px);
     font-weight: 700;
-    line-height: 1.6;
+    line-height: 1.4;
     letter-spacing: 0.06em;
   }
 
-  .gordix-hero-title span {
+  .gordix-hero-title .accent {
     color: var(--green);
   }
 
   .gordix-hero-lead {
-    margin-top: 26px;
+    margin-top: 24px;
     color: var(--muted);
     max-width: 520px;
+  }
+
+  /* スペックチップ */
+  .spec-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .spec-chip {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    min-width: 120px;
+  }
+
+  .spec-chip-value {
+    font-family: var(--font-en);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.02em;
+  }
+
+  .spec-chip-unit {
+    font-family: var(--font-en);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  .spec-chip-label {
+    font-size: 12px;
+    color: var(--ink);
+    margin-top: 8px;
   }
 
   .gordix-hero-buttons {
@@ -281,11 +393,17 @@ const cases = [
     gap: 16px;
   }
 
-  .gordix-hero-inner > img {
+  .gordix-hero-visual {
+    position: relative;
+  }
+
+  .gordix-hero-visual img {
     border-radius: var(--radius);
     aspect-ratio: 4 / 3;
     object-fit: cover;
+    width: 100%;
     clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
   }
 
   /* ---------- 特徴 ---------- */
@@ -296,16 +414,32 @@ const cases = [
     margin-top: 24px;
   }
 
+  .feature-card {
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--green);
+  }
+
   .feature-number {
     font-family: var(--font-en);
     font-size: 15px;
     letter-spacing: 0.2em;
-    color: var(--beige);
+    color: var(--green);
     margin-bottom: 12px;
   }
 
   .feature-card h3 {
-    font-size: 17px;
+    font-size: 18px;
     margin-bottom: 12px;
   }
 
@@ -327,11 +461,14 @@ const cases = [
     aspect-ratio: 4 / 3;
     object-fit: cover;
     width: 100%;
+    border: 1px solid var(--line);
   }
 
   .machine-title {
     font-size: 19px;
     margin-bottom: 20px;
+    padding-left: 14px;
+    border-left: 3px solid var(--green);
   }
 
   .spec-list {
@@ -342,7 +479,7 @@ const cases = [
     display: grid;
     grid-template-columns: 130px 1fr;
     gap: 16px;
-    padding: 12px 4px;
+    padding: 13px 4px;
     border-bottom: 1px solid var(--line);
     font-size: 14px;
   }
@@ -353,6 +490,12 @@ const cases = [
 
   .spec-list dd {
     margin: 0;
+  }
+
+  .spec-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
   }
 
   /* ---------- ドキュメント ---------- */
@@ -370,15 +513,15 @@ const cases = [
     align-items: center;
     gap: 22px;
     background: var(--card);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 22px 28px;
-    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease;
   }
 
   .doc-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(38, 36, 31, 0.1);
+    border-color: var(--green);
   }
 
   .doc-item .tag {
@@ -435,6 +578,7 @@ const cases = [
 
   .edu-list li {
     background: var(--card);
+    border: 1px solid var(--line);
     border-left: 4px solid var(--green);
     border-radius: 0 var(--radius) var(--radius) 0;
     padding: 18px 24px;
@@ -454,6 +598,7 @@ const cases = [
     aspect-ratio: 4 / 3;
     object-fit: cover;
     width: 100%;
+    border: 1px solid var(--line);
   }
 
   /* ---------- 導入事例 ---------- */
@@ -466,9 +611,9 @@ const cases = [
 
   .case-card {
     background: var(--card);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
   }
 
   .case-card img {
@@ -542,8 +687,13 @@ const cases = [
     padding: 12px 14px;
     border: 1px solid var(--line);
     border-radius: 6px;
-    background: #fff;
+    background: var(--bg-soft);
     color: var(--ink);
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #6b7178;
   }
 
   .contact-form input:focus,
@@ -568,10 +718,6 @@ const cases = [
     .gordix-hero-inner {
       grid-template-columns: 1fr;
       padding-block: 56px;
-    }
-
-    .gordix-hero-title {
-      font-size: 30px;
     }
 
     .feature-grid {
@@ -600,6 +746,13 @@ const cases = [
 
     .form-row {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .spec-chip {
+      flex: 1;
+      min-width: 0;
     }
   }
 </style>

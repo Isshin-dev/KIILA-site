@@ -4,6 +4,7 @@
    ========================================================== */
 
 :root {
+  /* accent … ブランドのメインアクセント（ボタン・強調） */
   --green: #1c5b3c;
   --green-dark: #133f29;
   --ink: #26241f;
@@ -13,9 +14,35 @@
   --card: #ffffff;
   --beige: #cbb289;
   --line: #e3ded3;
+  /* テーマで切り替わる表面色（ヘッダー／フッター等） */
+  --surface: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.94);
+  --code-bg: #26241f;
   --radius: 10px;
   --font-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
   --font-en: 'Jost', 'Noto Sans JP', sans-serif;
+}
+
+/* ==========================================================
+   ダークテーマ（GORDIXページ用）
+   黒トーン × オレンジアクセント。BaseLayout の theme="dark" で
+   <body class="theme-dark"> になり、変数を上書きして全体へ波及させる。
+   ========================================================== */
+body.theme-dark {
+  --green: #ee7733;
+  --green-dark: #d75f1e;
+  --ink: #f3f0ea;
+  --muted: #9aa0a6;
+  --bg: #131619;
+  --bg-soft: #1b2025;
+  --card: #20262d;
+  --surface: #191d21;
+  --header-bg: rgba(17, 20, 23, 0.9);
+  --beige: #ee7733;
+  --line: #313842;
+  --code-bg: #0d0f12;
+  background: var(--bg);
+  color: var(--ink);
 }
 
 *,
@@ -256,7 +283,7 @@ p {
 }
 
 .prose pre {
-  background: var(--ink);
+  background: var(--code-bg);
   color: #f0ede6;
   border-radius: var(--radius);
   padding: 20px 24px;

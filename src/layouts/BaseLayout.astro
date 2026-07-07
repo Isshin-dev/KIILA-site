@@ -7,11 +7,14 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  // 'dark' でGORDIX用の黒×オレンジテーマに切り替わる（body.theme-dark）
+  theme?: 'light' | 'dark';
 }
 
 const {
   title,
   description = 'KIILA株式会社は、カスタム木製タイルブランド「MOKURI」とCNCルーター「GORDIX」の普及を通じて、人と森、デザインと技術をつなぐ未来をつくります。',
+  theme = 'light',
 } = Astro.props;
 ---
 
@@ -30,7 +33,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class={theme === 'dark' ? 'theme-dark' : undefined}>
     <Header />
     <main>
       <slot />
