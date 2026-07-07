@@ -1,0 +1,605 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase, formatDate } from '../../lib/paths';
+
+const categoryLabel: Record<string, string> = {
+  manual: 'マニュアル',
+  case: '導入事例',
+  news: 'お知らせ',
+};
+
+const docs = (await getCollection('docs')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const features = [
+  {
+    title: '国産CNCルーター',
+    text: '国内で設計・サポートされるCNCルーター。導入からメンテナンスまで、日本語で一貫して伴走します。',
+  },
+  {
+    title: '教育機関にフィットする設計',
+    text: '安全カバーや操作パネルなど、はじめて機械に触れる生徒・学生でも扱いやすい構成。導入校のカリキュラムづくりも支援します。',
+  },
+  {
+    title: '設計から加工まで一気通貫',
+    text: 'CADデータの作成から切削加工まで、授業や工房のワークフローに合わせたソフトウェア環境を提案します。',
+  },
+];
+
+// 導入事例・お知らせはダミー。正式運用時に差し替え
+const cases = [
+  {
+    date: '2026.06.15',
+    tag: '導入事例',
+    title: '県立高校の探究学習にGORDIXを導入（サンプル）',
+    image: withBase('/images/gordix/case-01.png'),
+  },
+  {
+    date: '2026.05.28',
+    tag: '導入事例',
+    title: '公共図書館のものづくりスペースで稼働開始（サンプル）',
+    image: withBase('/images/gordix/case-02.png'),
+  },
+  {
+    date: '2026.05.01',
+    tag: 'お知らせ',
+    title: 'GORDIX体験会を毎月開催しています（サンプル）',
+    image: withBase('/images/gordix/case-03.png'),
+  },
+];
+---
+
+<BaseLayout
+  title="GORDIX｜国産CNCルーター普及事業 - KIILA株式会社"
+  description="GORDIXは教育機関向けを中心とした国産CNCルーターです。KIILA株式会社は導入支援・ドキュメント整備・コミュニティ運営を通じてGORDIXの普及を進めています。"
+>
+  <!-- ヒーロー -->
+  <section class="gordix-hero">
+    <div class="container gordix-hero-inner">
+      <div>
+        <p class="section-eyebrow">GORDIX — CNC Router</p>
+        <h1 class="gordix-hero-title">
+          教室から工房まで。<br />
+          <span>削る</span>を、みんなのものに。
+        </h1>
+        <p class="gordix-hero-lead">
+          GORDIXは、教育機関向けを中心に展開する国産CNCルーターです。
+          KIILAは導入支援・ノウハウの整備・コミュニティ運営を通じて、
+          デジタルものづくりのすそ野を広げていきます。
+        </p>
+        <div class="gordix-hero-buttons">
+          <a class="btn" href="#contact">導入相談・資料請求</a>
+          <a class="btn btn-outline" href="#docs">ドキュメントを見る</a>
+        </div>
+      </div>
+      <img src={withBase('/images/gordix/hero.png')} alt="CNCルーターGORDIX" />
+    </div>
+  </section>
+
+  <!-- 特徴 -->
+  <section class="section">
+    <div class="container">
+      <p class="section-eyebrow">Features</p>
+      <h2 class="section-title">GORDIXの特徴</h2>
+      <div class="feature-grid">
+        {
+          features.map((f, i) => (
+            <div class="card feature-card">
+              <p class="feature-number">0{i + 1}</p>
+              <h3>{f.title}</h3>
+              <p class="feature-text">{f.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="machine-grid">
+        <img src={withBase('/images/gordix/machine.png')} alt="GORDIX本体" />
+        <div>
+          <h3 class="machine-title">主な仕様（参考値・ダミー）</h3>
+          <dl class="spec-list">
+            <div><dt>加工エリア</dt><dd>900 × 600 × 100 mm</dd></div>
+            <div><dt>対応素材</dt><dd>木材・合板・MDF・樹脂 など</dd></div>
+            <div><dt>制御ソフト</dt><dd>専用CAM＋汎用Gコード対応</dd></div>
+            <div><dt>安全機構</dt><dd>全面カバー・非常停止ボタン</dd></div>
+            <div><dt>設置</dt><dd>100V電源対応・搬入設置サポートあり</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ドキュメント／ノウハウ -->
+  <section class="section section-alt" id="docs">
+    <div class="container">
+      <p class="section-eyebrow">Documents</p>
+      <h2 class="section-title">ドキュメント／ノウハウ</h2>
+      <p class="section-lead">
+        GORDIXのセットアップから活用ノウハウ、導入事例までを随時公開しています。
+      </p>
+      <ul class="doc-list">
+        {
+          docs.map((doc) => (
+            <li>
+              <a class="doc-item" href={withBase(`/gordix/docs/${doc.id}/`)}>
+                <span class="tag tag-green">{categoryLabel[doc.data.category]}</span>
+                <span class="doc-item-main">
+                  <span class="doc-item-title">{doc.data.title}</span>
+                  <span class="doc-item-desc">{doc.data.description}</span>
+                </span>
+                <time class="doc-item-date">{formatDate(doc.data.date)}</time>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 教育機関向けプログラム -->
+  <section class="section" id="education">
+    <div class="container edu-grid">
+      <div>
+        <p class="section-eyebrow">For Education</p>
+        <h2 class="section-title">教育機関向け導入プログラム</h2>
+        <p class="edu-lead">
+          「つくりたい」を、カリキュラムに。探究学習・ものづくり教育の現場で、
+          GORDIXは生徒のアイデアをかたちにする道具になります。
+        </p>
+        <ul class="edu-list">
+          <li>
+            <strong>探究学習での活用</strong>
+            地域材を使ったプロダクト開発など、課題設定から製作・発表までを一貫して体験できます。
+          </li>
+          <li>
+            <strong>教員向け研修</strong>
+            操作研修に加え、授業案・安全指導のテンプレートを提供。初年度は伴走サポート付きです。
+          </li>
+          <li>
+            <strong>保守・サポート</strong>
+            国内サポート窓口による定期メンテナンスと消耗品供給で、長く安心して使えます。
+          </li>
+        </ul>
+      </div>
+      <img src={withBase('/images/gordix/education.png')} alt="教室でGORDIXを使う様子" />
+    </div>
+  </section>
+
+  <!-- 導入事例・お知らせ -->
+  <section class="section section-alt" id="cases">
+    <div class="container">
+      <p class="section-eyebrow">Cases & News</p>
+      <h2 class="section-title">導入事例・お知らせ</h2>
+      <div class="case-grid">
+        {
+          cases.map((item) => (
+            <article class="case-card">
+              <img src={item.image} alt="" />
+              <div class="case-body">
+                <span class="tag">{item.tag}</span>
+                <p class="case-title">{item.title}</p>
+                <time class="case-date">{item.date}</time>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 問い合わせ・資料請求 -->
+  <section class="section" id="contact">
+    <div class="container contact-inner">
+      <p class="section-eyebrow">Contact</p>
+      <h2 class="section-title">お問い合わせ・資料請求</h2>
+      <p class="section-lead">
+        導入のご相談、デモ見学、資料請求など、お気軽にお問い合わせください。
+      </p>
+      <!-- ダミーフォーム：送信処理は未実装。フォームサービス接続時に action を差し替える -->
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <label>
+            お名前 <span class="required">必須</span>
+            <input type="text" name="name" placeholder="山田 太郎" required />
+          </label>
+          <label>
+            ご所属（学校・団体・会社名）
+            <input type="text" name="organization" placeholder="○○高等学校" />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>
+            メールアドレス <span class="required">必須</span>
+            <input type="email" name="email" placeholder="taro@example.com" required />
+          </label>
+          <label>
+            お問い合わせ種別
+            <select name="type">
+              <option>資料請求</option>
+              <option>導入相談</option>
+              <option>デモ見学の希望</option>
+              <option>その他</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          お問い合わせ内容
+          <textarea name="message" rows="6" placeholder="ご検討状況やご質問をご記入ください"></textarea>
+        </label>
+        <p class="form-note">※ 現在このフォームは準備中のため、送信は行われません。</p>
+        <button class="btn" type="submit">送信する</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // ダミーフォーム：送信を止めてメッセージだけ表示する
+  const form = document.getElementById('contact-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('このフォームは準備中のダミーです。送信は行われませんでした。');
+  });
+</script>
+
+<style>
+  /* ---------- ヒーロー ---------- */
+  .gordix-hero {
+    background: linear-gradient(135deg, #fdfcf9 0%, var(--bg) 60%, var(--bg-soft) 100%);
+  }
+
+  .gordix-hero-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 56px;
+    padding-block: 88px;
+  }
+
+  .gordix-hero-title {
+    font-size: clamp(30px, 3.2vw, 40px);
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.06em;
+  }
+
+  .gordix-hero-title span {
+    color: var(--green);
+  }
+
+  .gordix-hero-lead {
+    margin-top: 26px;
+    color: var(--muted);
+    max-width: 520px;
+  }
+
+  .gordix-hero-buttons {
+    margin-top: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .gordix-hero-inner > img {
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* ---------- 特徴 ---------- */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .feature-number {
+    font-family: var(--font-en);
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    color: var(--beige);
+    margin-bottom: 12px;
+  }
+
+  .feature-card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .feature-text {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .machine-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 64px;
+  }
+
+  .machine-grid img {
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .machine-title {
+    font-size: 19px;
+    margin-bottom: 20px;
+  }
+
+  .spec-list {
+    margin: 0;
+  }
+
+  .spec-list div {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 16px;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+
+  .spec-list dt {
+    color: var(--muted);
+  }
+
+  .spec-list dd {
+    margin: 0;
+  }
+
+  /* ---------- ドキュメント ---------- */
+  .doc-list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .doc-item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px 28px;
+    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .doc-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(38, 36, 31, 0.1);
+  }
+
+  .doc-item .tag {
+    flex-shrink: 0;
+  }
+
+  .doc-item-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .doc-item-title {
+    display: block;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .doc-item-desc {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .doc-item-date {
+    flex-shrink: 0;
+    font-family: var(--font-en);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- 教育機関向け ---------- */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .edu-lead {
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .edu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .edu-list li {
+    background: var(--card);
+    border-left: 4px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 18px 24px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .edu-list strong {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  .edu-grid > img {
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* ---------- 導入事例 ---------- */
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .case-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
+  }
+
+  .case-card img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .case-body {
+    padding: 18px 20px 22px;
+  }
+
+  .case-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.8;
+    margin-top: 10px;
+  }
+
+  .case-date {
+    display: block;
+    font-family: var(--font-en);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- フォーム ---------- */
+  .contact-inner {
+    max-width: 760px;
+  }
+
+  .contact-form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .required {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    font-size: 10px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    margin-left: 6px;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font-family: var(--font-jp);
+    font-size: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 1px;
+    border-color: var(--green);
+  }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .contact-form .btn {
+    align-self: flex-start;
+  }
+
+  /* ---------- レスポンシブ ---------- */
+  @media (max-width: 960px) {
+    .gordix-hero-inner {
+      grid-template-columns: 1fr;
+      padding-block: 56px;
+    }
+
+    .gordix-hero-title {
+      font-size: 30px;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .machine-grid,
+    .edu-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .case-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .doc-item {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .doc-item-main {
+      flex-basis: 100%;
+      order: 3;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

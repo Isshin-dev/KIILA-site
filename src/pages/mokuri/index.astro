@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/paths';
+
+const EC_URL = 'https://isshin-dev.github.io/woodtile_ec/';
+
+const products = [
+  { name: '市松', desc: '杉柾目・オイル仕上げ', image: withBase('/images/mokuri/product-01.png') },
+  { name: '矢羽根', desc: '檜・浮造り仕上げ', image: withBase('/images/mokuri/product-02.png') },
+  { name: '網代', desc: '杉赤身・柿渋染め', image: withBase('/images/mokuri/product-03.png') },
+  { name: 'ヘリンボーン', desc: 'ナラ・蜜蝋ワックス', image: withBase('/images/mokuri/product-04.png') },
+  { name: '乱貼り', desc: '混合樹種・無塗装', image: withBase('/images/mokuri/product-05.png') },
+  { name: 'モザイク', desc: '端材再生・漆拭き仕上げ', image: withBase('/images/mokuri/product-06.png') },
+];
+---
+
+<BaseLayout
+  title="MOKURI｜カスタムメイド木製タイルブランド - KIILA株式会社"
+  description="MOKURIは、空間に合わせて一枚から設計できるカスタムメイドの木製タイルブランドです。杉・檜など日本の木と、漆・柿渋など伝統の仕上げを、現代の空間へ。"
+>
+  <!-- ヒーロー -->
+  <section class="mokuri-hero">
+    <img src={withBase('/images/mokuri/hero.png')} alt="MOKURIの木製タイルが貼られた壁面" />
+    <div class="mokuri-hero-copy">
+      <p class="mokuri-hero-eyebrow">MOKURI — Custom Wood Tile</p>
+      <h1>木の表情を、<br />空間の主役に。</h1>
+      <p class="mokuri-hero-lead">
+        空間に合わせて一枚から設計する、カスタムメイドの木製タイルブランド。
+      </p>
+    </div>
+  </section>
+
+  <!-- ブランドストーリー -->
+  <section class="section">
+    <div class="container story-grid">
+      <div class="story-text">
+        <p class="section-eyebrow">Story</p>
+        <h2 class="section-title">木と、手と、機械と。</h2>
+        <p>
+          同じ山の杉でも、一本ごとに木目は違い、一枚ごとに表情が変わります。
+          MOKURIは、その揺らぎこそが空間の豊かさだと考えます。
+        </p>
+        <p>
+          素材は、杉や檜をはじめとする日本の木。仕上げには、漆や柿渋、蜜蝋といった
+          先人たちが磨いてきた知恵を借りながら、CNCルーターによる精密な加工を掛け合わせ、
+          伝統と技術のあいだにある「ちょうどよい手ざわり」を探しています。
+        </p>
+        <p>
+          壁一面のアートウォールから、店舗のサイン、住まいのワンポイントまで。
+          空間の寸法に合わせて、パターン・樹種・仕上げをひとつずつ設計します。
+        </p>
+      </div>
+      <img class="story-image" src={withBase('/images/mokuri/story.png')} alt="木製タイルの制作風景" />
+    </div>
+  </section>
+
+  <!-- プロダクトショーケース -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-eyebrow">Products</p>
+      <h2 class="section-title">パターンショーケース</h2>
+      <p class="section-lead">
+        代表的なパターンの一例です。樹種・サイズ・仕上げはすべてカスタマイズできます。
+      </p>
+      <div class="product-grid">
+        {
+          products.map((p) => (
+            <figure class="product-card">
+              <img src={p.image} alt={`木製タイル ${p.name}`} />
+              <figcaption>
+                <p class="product-name">{p.name}</p>
+                <p class="product-desc">{p.desc}</p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ECサイトへの導線（ボタン＝別タブ遷移） -->
+  <section class="section" id="order">
+    <div class="container order-intro">
+      <p class="section-eyebrow">Order</p>
+      <h2 class="section-title">オンラインで、あなたのタイルを設計する</h2>
+      <p class="section-lead">
+        オーダータイル設計ツールで、パターンやサイズを選びながら
+        オリジナルの木製タイルをその場で設計・注文できます。
+      </p>
+      <a class="btn btn-large" href={EC_URL} target="_blank" rel="noopener noreferrer">
+        設計ツールを開く（別タブ）
+      </a>
+    </div>
+
+    <!--
+      ECサイトへの導線は「別タブで開くボタン（上）」と「iframe埋め込み（下）」の
+      両方を実装してある。どちらかに絞る場合は不要な方のブロックを削除する。
+    -->
+    <div class="container order-embed">
+      <p class="order-embed-note">▼ ページ内でそのまま試すこともできます</p>
+      <iframe
+        src={EC_URL}
+        title="MOKURI オーダータイル設計ツール"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-band-inner">
+      <p class="cta-band-text">
+        空間に合わせた木製タイルのご相談を承ります。<br />
+        図面がなくても、イメージの段階からご一緒します。
+      </p>
+      <div class="cta-band-buttons">
+        <a class="btn btn-white" href={EC_URL} target="_blank" rel="noopener noreferrer">設計ツールで注文する</a>
+        <a class="btn btn-white-outline" href={withBase('/gordix/#contact')}>問い合わせる</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- ヒーロー ---------- */
+  .mokuri-hero {
+    position: relative;
+  }
+
+  .mokuri-hero > img {
+    width: 100%;
+    height: min(72vh, 620px);
+    object-fit: cover;
+  }
+
+  .mokuri-hero-copy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-inline: max(24px, calc((100% - 1120px) / 2));
+    background: linear-gradient(90deg, rgba(38, 36, 31, 0.55) 0%, rgba(38, 36, 31, 0.1) 70%);
+    color: #fff;
+  }
+
+  .mokuri-hero-eyebrow {
+    font-family: var(--font-en);
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .mokuri-hero-copy h1 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+  }
+
+  .mokuri-hero-lead {
+    margin-top: 22px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- ストーリー ---------- */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .story-text p:not(.section-eyebrow) {
+    margin-bottom: 20px;
+    color: var(--muted);
+  }
+
+  .story-image {
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* ---------- プロダクト ---------- */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  .product-card {
+    margin: 0;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
+  }
+
+  .product-card img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .product-card figcaption {
+    padding: 18px 20px 22px;
+  }
+
+  .product-name {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .product-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ---------- EC導線 ---------- */
+  .order-intro {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-intro .section-lead {
+    margin-bottom: 32px;
+  }
+
+  .btn-large {
+    padding: 18px 40px;
+    font-size: 15px;
+  }
+
+  .order-embed {
+    margin-top: 56px;
+  }
+
+  .order-embed-note {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  .order-embed iframe {
+    width: 100%;
+    height: 720px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+
+  /* ---------- レスポンシブ ---------- */
+  @media (max-width: 960px) {
+    .mokuri-hero-copy h1 {
+      font-size: 28px;
+    }
+
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .order-embed iframe {
+      height: 560px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

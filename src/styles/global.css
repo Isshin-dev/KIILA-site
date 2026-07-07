@@ -1,0 +1,315 @@
+/* ==========================================================
+   KIILA-site グローバルスタイル
+   北欧／バウハウス的なミニマルさ × 木材の温かみ
+   ========================================================== */
+
+:root {
+  --green: #1c5b3c;
+  --green-dark: #133f29;
+  --ink: #26241f;
+  --muted: #6f6a60;
+  --bg: #f7f5f0;
+  --bg-soft: #efece4;
+  --card: #ffffff;
+  --beige: #cbb289;
+  --line: #e3ded3;
+  --radius: 10px;
+  --font-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --font-en: 'Jost', 'Noto Sans JP', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-jp);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.9;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- レイアウト ---------- */
+
+.container {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-block: 96px;
+}
+
+.section-alt {
+  background: var(--bg-soft);
+}
+
+/* 英字の小見出し（Nordic的な細身サンセリフ） */
+.section-eyebrow {
+  font-family: var(--font-en);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.section-lead {
+  color: var(--muted);
+  max-width: 640px;
+}
+
+/* ---------- ボタン ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--green);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.btn::after {
+  content: '→';
+  font-family: var(--font-en);
+  transition: transform 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--green-dark);
+}
+
+.btn:hover::after {
+  transform: translateX(4px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+}
+
+.btn-outline:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--green);
+  border-color: #fff;
+}
+
+.btn-white:hover {
+  background: var(--bg);
+}
+
+.btn-white-outline {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-white-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- タグ・チップ ---------- */
+
+.tag {
+  display: inline-block;
+  padding: 3px 12px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--muted);
+}
+
+.tag-green {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+/* ---------- カード ---------- */
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 36px 30px;
+  box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
+}
+
+/* ---------- CTAバンド ---------- */
+
+.cta-band {
+  background: var(--green);
+  color: #fff;
+  padding-block: 56px;
+}
+
+.cta-band-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.cta-band-text {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 2;
+}
+
+.cta-band-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ---------- ドキュメント本文（Markdown描画部） ---------- */
+
+.prose {
+  max-width: 720px;
+}
+
+.prose h2 {
+  font-size: 22px;
+  margin: 48px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--green);
+}
+
+.prose h3 {
+  font-size: 18px;
+  margin: 36px 0 12px;
+}
+
+.prose p {
+  margin: 0 0 20px;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 24px;
+  margin: 0 0 20px;
+}
+
+.prose li {
+  margin-bottom: 6px;
+}
+
+.prose code {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: var(--ink);
+  color: #f0ede6;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  overflow-x: auto;
+  line-height: 1.7;
+}
+
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  margin: 0 0 20px;
+  padding: 4px 24px;
+  border-left: 3px solid var(--beige);
+  color: var(--muted);
+}
+
+.prose table {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--bg-soft);
+}
+
+/* ---------- レスポンシブ ---------- */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .section {
+    padding-block: 64px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .cta-band-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

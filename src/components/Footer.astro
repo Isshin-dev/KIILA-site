@@ -1,0 +1,87 @@
+---
+import { withBase } from '../lib/paths';
+
+const nav = [
+  { href: withBase('/#about'), label: '事業概要' },
+  { href: withBase('/mokuri/'), label: 'MOKURI' },
+  { href: withBase('/gordix/'), label: 'GORDIX' },
+  { href: withBase('/#news'), label: 'お知らせ' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-company">
+      <p class="footer-logo">KIILA</p>
+      <p class="footer-company-name">KIILA株式会社</p>
+      <!-- ↓住所・連絡先はダミー。正式決定後に差し替え -->
+      <p class="footer-address">
+        〒150-0002 東京都渋谷区渋谷1-2-3 渋谷第一ビル 5F<br />
+        TEL 03-1234-5678　MAIL info@kiila.co.jp
+      </p>
+    </div>
+    <nav class="footer-nav">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="#">プライバシーポリシー</a>
+    </nav>
+  </div>
+  <p class="copyright">© 2026 KIILA Co., Ltd. All Rights Reserved.</p>
+</footer>
+
+<style>
+  .site-footer {
+    background: #fff;
+    border-top: 1px solid var(--line);
+    padding-top: 64px;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-en);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+  }
+
+  .footer-company-name {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    margin-top: 6px;
+  }
+
+  .footer-address {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 2.1;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 28px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    padding-top: 10px;
+  }
+
+  .footer-nav a:hover {
+    color: var(--green);
+  }
+
+  .copyright {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 40px 24px 28px;
+  }
+</style>
