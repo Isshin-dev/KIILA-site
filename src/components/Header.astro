@@ -12,33 +12,36 @@ const nav = [
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href={withBase('/')}>
-      <span class="brand-logo">KIILA</span>
-      <span class="brand-name">KIILA株式会社</span>
-    </a>
-
-    <button class="nav-toggle" type="button" aria-label="メニューを開閉する" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="brand" href={withBase('/')} aria-label="KIILA ホーム">KIILA</a>
 
     <nav class="global-nav" id="global-nav">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-      <a class="btn btn-nav" href={withBase('/gordix/#contact')}>相談する</a>
+      {nav.map((item) => <a class="nav-link" href={item.href}>{item.label}</a>)}
     </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-secondary btn-sm" href={withBase('/gordix/#contact')}>お問い合わせ</a>
+      <a class="btn btn-primary btn-sm" href={withBase('/gordix/#contact')}>相談する</a>
+      <button class="nav-toggle" type="button" aria-label="メニューを開閉する" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
 </header>
 
 <script>
   const toggle = document.querySelector('.nav-toggle');
-  const nav = document.getElementById('global-nav');
+  const mobile = document.getElementById('mobile-nav');
   toggle?.addEventListener('click', () => {
-    const open = nav?.classList.toggle('is-open');
+    const open = mobile?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(!!open));
   });
-  // ナビ内リンクをタップしたらメニューを閉じる（スマホ用）
-  nav?.addEventListener('click', (e) => {
+  mobile?.addEventListener('click', (e) => {
     if ((e.target as HTMLElement).tagName === 'A') {
-      nav.classList.remove('is-open');
+      mobile.classList.remove('is-open');
       toggle?.setAttribute('aria-expanded', 'false');
     }
   });
@@ -49,62 +52,54 @@ const nav = [
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--header-bg);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+    background: var(--canvas);
+    border-bottom: 1px solid var(--hairline);
   }
 
   .header-inner {
-    max-width: 1240px;
+    max-width: 1280px;
     margin-inline: auto;
-    padding: 14px 24px;
+    height: 64px;
+    padding-inline: 32px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    gap: 32px;
   }
 
   .brand {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-  }
-
-  .brand-logo {
-    font-family: var(--font-en);
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    color: var(--green);
-  }
-
-  .brand-name {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
   .global-nav {
     display: flex;
     align-items: center;
-    gap: 30px;
-    font-size: 13px;
-    letter-spacing: 0.1em;
+    gap: 26px;
+    margin-right: auto;
   }
 
-  .global-nav a:not(.btn) {
-    padding-block: 6px;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s ease, color 0.2s ease;
+  .nav-link {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .nav-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
-  .global-nav a:not(.btn):hover {
-    color: var(--green);
-    border-bottom-color: var(--green);
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
-  .btn-nav {
-    padding: 10px 22px;
+  .btn-sm {
+    font-size: 15px;
+    min-height: 40px;
+    padding: 8px 18px;
   }
 
   .nav-toggle {
@@ -112,52 +107,55 @@ const nav = [
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 42px;
-    height: 42px;
-    padding: 9px;
-    background: none;
-    border: 1px solid var(--line);
-    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    background: var(--surface-soft);
+    border: none;
+    border-radius: var(--r-full);
     cursor: pointer;
   }
-
   .nav-toggle span {
     display: block;
-    height: 2px;
+    height: 1.5px;
     background: var(--ink);
   }
 
-  @media (max-width: 900px) {
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 8px 32px 24px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .mobile-nav a {
+    padding: 14px 0;
+    font-size: 18px;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .mobile-nav.is-open {
+    display: flex;
+  }
+
+  @media (max-width: 960px) {
+    .global-nav {
+      display: none;
+    }
+    .header-inner {
+      justify-content: space-between;
+      gap: 12px;
+    }
     .nav-toggle {
       display: flex;
     }
+  }
 
-    .global-nav {
+  @media (max-width: 560px) {
+    .header-inner {
+      padding-inline: 24px;
+    }
+    /* 狭幅ではセカンダリを隠してプライマリ＋ハンバーガーを残す */
+    .header-actions .btn-secondary {
       display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      background: var(--surface);
-      border-bottom: 1px solid var(--line);
-      padding: 12px 24px 24px;
-    }
-
-    .global-nav.is-open {
-      display: flex;
-    }
-
-    .global-nav a:not(.btn) {
-      padding: 14px 4px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .btn-nav {
-      margin-top: 18px;
-      justify-content: center;
     }
   }
 </style>

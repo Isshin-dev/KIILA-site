@@ -13,7 +13,6 @@ const docs = (await getCollection('docs')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-// ヒーローのスペックチップ（3-in-1 Portable CNC の主要スペック）
 const specChips = [
   { value: '約4kg', unit: '9 lb', label: '持ち運べる軽さ' },
   { value: "4'×8'", unit: '1220×2440mm', label: '大判の加工エリア' },
@@ -21,24 +20,11 @@ const specChips = [
 ];
 
 const features = [
-  {
-    no: '01',
-    title: '3-in-1、これ一台で。',
-    text: '切削・彫刻・彫り込みをワンマシンで。刃と設定を替えるだけで、看板づくりから精密な部品加工まで守備範囲が広がります。',
-  },
-  {
-    no: '02',
-    title: '現場に、持ち出せる。',
-    text: '約4kgのポータブル設計。Makita 18V充電式ルーターで駆動するため、電源のない場所や教室の机の上でも動かせます。',
-  },
-  {
-    no: '03',
-    title: '教室に、ちょうどいい。',
-    text: '教育向けエディション「GORDIX STUDENT」を用意。はじめて機械に触れる生徒でも扱いやすい安全設計と、授業用の教材が揃います。',
-  },
+  { no: '01', title: '3-in-1、これ一台で。', text: '切削・彫刻・彫り込みをワンマシンで。刃と設定を替えるだけで、看板づくりから精密な部品加工まで守備範囲が広がります。' },
+  { no: '02', title: '現場に、持ち出せる。', text: '約4kgのポータブル設計。Makita 18V充電式ルーターで駆動するため、電源のない場所や教室の机の上でも動かせます。' },
+  { no: '03', title: '教室に、ちょうどいい。', text: '教育向けエディション「GORDIX STUDENT」を用意。はじめて機械に触れる生徒でも扱いやすい安全設計と、授業用の教材が揃います。' },
 ];
 
-// 主なスペック（3-in-1 Portable CNC）※製品構成により異なる場合あり
 const specs = [
   { dt: '加工モード', dd: '3-in-1（切削 / 彫刻 / 彫り込み）' },
   { dt: '加工エリア', dd: "4' × 8'（約 1,220 × 2,440 mm）" },
@@ -50,64 +36,47 @@ const specs = [
 
 // 導入事例・お知らせはダミー。正式運用時に差し替え
 const cases = [
-  {
-    date: '2026.06.15',
-    tag: '導入事例',
-    title: '県立高校の探究学習にGORDIXを導入（サンプル）',
-    image: withBase('/images/gordix/case-01.png'),
-  },
-  {
-    date: '2026.05.28',
-    tag: '導入事例',
-    title: '公共図書館のものづくりスペースで稼働開始（サンプル）',
-    image: withBase('/images/gordix/case-02.png'),
-  },
-  {
-    date: '2026.05.01',
-    tag: 'お知らせ',
-    title: 'GORDIX体験会を毎月開催しています（サンプル）',
-    image: withBase('/images/gordix/case-03.png'),
-  },
+  { date: '2026.06.15', tag: '導入事例', title: '県立高校の探究学習にGORDIXを導入（サンプル）', image: withBase('/images/gordix/case-01.png') },
+  { date: '2026.05.28', tag: '導入事例', title: '公共図書館のものづくりスペースで稼働開始（サンプル）', image: withBase('/images/gordix/case-02.png') },
+  { date: '2026.05.01', tag: 'お知らせ', title: 'GORDIX体験会を毎月開催しています（サンプル）', image: withBase('/images/gordix/case-03.png') },
 ];
 ---
 
 <BaseLayout
-  theme="dark"
   title="GORDIX｜3-in-1 ポータブルCNC - KIILA株式会社"
   description="GORDIXは、切削・彫刻・彫り込みを1台でこなす3-in-1のポータブルCNCです。約4kg・充電式ルーター駆動で、教育機関の教室から工房まで。KIILAが導入支援・ドキュメント整備・コミュニティ運営で普及を進めます。"
 >
-  <!-- ヒーロー -->
-  <section class="gordix-hero">
-    <div class="container gordix-hero-inner">
-      <div class="gordix-hero-copy">
-        <img class="gordix-logo" src={withBase('/images/gordix/gordix-logo.svg')} alt="GORDIX" />
-        <p class="gordix-badge">3-in-1 PORTABLE CNC</p>
-        <h1 class="gordix-hero-title">
-          <span class="accent">削る</span>を、<br />
-          机の上に。
-        </h1>
-        <p class="gordix-hero-lead">
-          切削・彫刻・彫り込みを1台で。約4kgのポータブルCNC「GORDIX」が、
-          教室から工房まで、デジタルものづくりのすそ野を広げます。
-        </p>
-        <div class="spec-chips">
-          {
-            specChips.map((c) => (
-              <div class="spec-chip">
-                <span class="spec-chip-value">{c.value}</span>
-                <span class="spec-chip-unit">{c.unit}</span>
-                <span class="spec-chip-label">{c.label}</span>
-              </div>
-            ))
-          }
+  <!-- ヒーロー（navy color-block × orange accent） -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="color-block block-navy hero">
+        <div class="hero-copy">
+          <img class="hero-logo" src={withBase('/images/gordix/gordix-logo.svg')} alt="GORDIX" />
+          <p class="eyebrow hero-eyebrow">3-in-1 Portable CNC</p>
+          <h1 class="display-xl hero-title"><span class="accent">削る</span>を、<br />机の上に。</h1>
+          <p class="body-lg hero-lead">
+            切削・彫刻・彫り込みを1台で。約4kgのポータブルCNC「GORDIX」が、
+            教室から工房まで、デジタルものづくりのすそ野を広げます。
+          </p>
+          <div class="spec-chips">
+            {
+              specChips.map((c) => (
+                <div class="spec-chip">
+                  <span class="spec-chip-value">{c.value}</span>
+                  <span class="caption spec-chip-unit">{c.unit}</span>
+                  <span class="body-sm spec-chip-label">{c.label}</span>
+                </div>
+              ))
+            }
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-orange" href="#contact">導入相談・資料請求</a>
+            <a class="btn btn-on-dark" href="#docs">ドキュメントを見る</a>
+          </div>
         </div>
-        <div class="gordix-hero-buttons">
-          <a class="btn" href="#contact">導入相談・資料請求</a>
-          <a class="btn btn-outline" href="#docs">ドキュメントを見る</a>
+        <div class="hero-visual frame">
+          <img src={withBase('/images/gordix/hero.png')} alt="3-in-1 ポータブルCNC GORDIX" />
         </div>
-      </div>
-      <div class="gordix-hero-visual">
-        <img src={withBase('/images/gordix/hero.png')} alt="3-in-1 ポータブルCNC GORDIX" />
       </div>
     </div>
   </section>
@@ -115,58 +84,63 @@ const cases = [
   <!-- 特徴 -->
   <section class="section">
     <div class="container">
-      <p class="section-eyebrow">Features</p>
-      <h2 class="section-title">GORDIXの特徴</h2>
+      <div class="sec-head">
+        <p class="eyebrow eyebrow-orange">Features</p>
+        <h2 class="display-lg">GORDIXの特徴</h2>
+      </div>
       <div class="feature-grid">
         {
           features.map((f) => (
-            <div class="card feature-card">
-              <p class="feature-number">{f.no}</p>
-              <h3>{f.title}</h3>
-              <p class="feature-text">{f.text}</p>
+            <div class="card-hairline feature">
+              <p class="feature-no">{f.no}</p>
+              <h3 class="card-title feature-title">{f.title}</h3>
+              <p class="body-sm feature-text">{f.text}</p>
             </div>
           ))
         }
       </div>
-      <div class="machine-grid">
-        <img src={withBase('/images/gordix/machine.png')} alt="GORDIX本体" />
-        <div>
-          <h3 class="machine-title">主なスペック</h3>
+      <div class="machine">
+        <div class="machine-image frame">
+          <img src={withBase('/images/gordix/machine.png')} alt="GORDIX本体" />
+        </div>
+        <div class="machine-spec">
+          <p class="eyebrow eyebrow-orange">Spec</p>
+          <h3 class="headline machine-title">主なスペック</h3>
           <dl class="spec-list">
             {
               specs.map((s) => (
                 <div>
-                  <dt>{s.dt}</dt>
-                  <dd>{s.dd}</dd>
+                  <dt class="body-sm">{s.dt}</dt>
+                  <dd class="body-sm">{s.dd}</dd>
                 </div>
               ))
             }
           </dl>
-          <p class="spec-note">※ 仕様は製品構成により異なる場合があります。</p>
+          <p class="caption spec-note">※ 仕様は製品構成により異なる場合があります</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ドキュメント／ノウハウ -->
-  <section class="section section-alt" id="docs">
+  <section class="section-tight" id="docs">
     <div class="container">
-      <p class="section-eyebrow">Documents</p>
-      <h2 class="section-title">ドキュメント／ノウハウ</h2>
-      <p class="section-lead">
-        GORDIXのセットアップから活用ノウハウ、導入事例までを随時公開しています。
-      </p>
+      <div class="sec-head">
+        <p class="eyebrow eyebrow-orange">Documents</p>
+        <h2 class="display-lg">ドキュメント／ノウハウ</h2>
+        <p class="subhead docs-lead">セットアップから活用ノウハウ、導入事例までを随時公開しています。</p>
+      </div>
       <ul class="doc-list">
         {
           docs.map((doc) => (
             <li>
               <a class="doc-item" href={withBase(`/gordix/docs/${doc.id}/`)}>
-                <span class="tag tag-green">{categoryLabel[doc.data.category]}</span>
-                <span class="doc-item-main">
-                  <span class="doc-item-title">{doc.data.title}</span>
-                  <span class="doc-item-desc">{doc.data.description}</span>
+                <span class="chip doc-chip">{categoryLabel[doc.data.category]}</span>
+                <span class="doc-main">
+                  <span class="body doc-title">{doc.data.title}</span>
+                  <span class="body-sm doc-desc">{doc.data.description}</span>
                 </span>
-                <time class="doc-item-date">{formatDate(doc.data.date)}</time>
+                <time class="caption doc-date">{formatDate(doc.data.date)}</time>
               </a>
             </li>
           ))
@@ -175,50 +149,53 @@ const cases = [
     </div>
   </section>
 
-  <!-- 教育機関向けプログラム（GORDIX STUDENT） -->
-  <section class="section" id="education">
-    <div class="container edu-grid">
-      <div>
-        <p class="section-eyebrow">GORDIX STUDENT</p>
-        <h2 class="section-title">教育機関向け導入プログラム</h2>
-        <p class="edu-lead">
-          「つくりたい」を、カリキュラムに。探究学習・ものづくり教育の現場で、
-          GORDIXは生徒のアイデアをかたちにする道具になります。
-        </p>
+  <!-- 教育機関向けプログラム（GORDIX STUDENT / coral color-block） -->
+  <section class="section-tight" id="education">
+    <div class="container">
+      <div class="color-block block-coral edu">
+        <div class="edu-copy">
+          <p class="eyebrow eyebrow-mark">GORDIX STUDENT</p>
+          <h2 class="display-lg edu-title">教育機関向け<br />導入プログラム</h2>
+          <p class="body edu-lead">
+            「つくりたい」を、カリキュラムに。探究学習・ものづくり教育の現場で、
+            GORDIXは生徒のアイデアをかたちにする道具になります。
+          </p>
+        </div>
         <ul class="edu-list">
           <li>
-            <strong>探究学習での活用</strong>
-            地域材を使ったプロダクト開発など、課題設定から製作・発表までを一貫して体験できます。
+            <p class="card-title edu-item-title">探究学習での活用</p>
+            <p class="body-sm">地域材を使ったプロダクト開発など、課題設定から製作・発表までを一貫して体験できます。</p>
           </li>
           <li>
-            <strong>教員向け研修</strong>
-            操作研修に加え、授業案・安全指導のテンプレートを提供。初年度は伴走サポート付きです。
+            <p class="card-title edu-item-title">教員向け研修</p>
+            <p class="body-sm">操作研修に加え、授業案・安全指導のテンプレートを提供。初年度は伴走サポート付きです。</p>
           </li>
           <li>
-            <strong>保守・サポート</strong>
-            国内サポート窓口による定期メンテナンスと消耗品供給で、長く安心して使えます。
+            <p class="card-title edu-item-title">保守・サポート</p>
+            <p class="body-sm">国内サポート窓口による定期メンテナンスと消耗品供給で、長く安心して使えます。</p>
           </li>
         </ul>
       </div>
-      <img src={withBase('/images/gordix/education.png')} alt="教室でGORDIXを使う様子" />
     </div>
   </section>
 
   <!-- 導入事例・お知らせ -->
-  <section class="section section-alt" id="cases">
+  <section class="section-tight" id="cases">
     <div class="container">
-      <p class="section-eyebrow">Cases & News</p>
-      <h2 class="section-title">導入事例・お知らせ</h2>
+      <div class="sec-head">
+        <p class="eyebrow eyebrow-orange">Cases &amp; News</p>
+        <h2 class="display-lg">導入事例・お知らせ</h2>
+      </div>
       <div class="case-grid">
         {
           cases.map((item) => (
-            <article class="case-card">
-              <img src={item.image} alt="" />
-              <div class="case-body">
-                <span class="tag">{item.tag}</span>
-                <p class="case-title">{item.title}</p>
-                <time class="case-date">{item.date}</time>
+            <article class="case tile">
+              <div class="case-thumb frame">
+                <img src={item.image} alt="" />
               </div>
+              <span class="chip case-chip">{item.tag}</span>
+              <p class="body-sm case-title">{item.title}</p>
+              <time class="caption case-date">{item.date}</time>
             </article>
           ))
         }
@@ -226,54 +203,55 @@ const cases = [
     </div>
   </section>
 
-  <!-- 問い合わせ・資料請求 -->
-  <section class="section" id="contact">
-    <div class="container contact-inner">
-      <p class="section-eyebrow">Contact</p>
-      <h2 class="section-title">お問い合わせ・資料請求</h2>
-      <p class="section-lead">
-        導入のご相談、デモ見学、資料請求など、お気軽にお問い合わせください。
-      </p>
-      <!-- ダミーフォーム：送信処理は未実装。フォームサービス接続時に action を差し替える -->
-      <form class="contact-form" id="contact-form">
-        <div class="form-row">
-          <label>
-            お名前 <span class="required">必須</span>
-            <input type="text" name="name" placeholder="山田 太郎" required />
-          </label>
-          <label>
-            ご所属（学校・団体・会社名）
-            <input type="text" name="organization" placeholder="○○高等学校" />
-          </label>
+  <!-- 問い合わせ・資料請求（lime color-block） -->
+  <section class="section-tight" id="contact">
+    <div class="container">
+      <div class="color-block block-lime contact">
+        <div class="contact-head">
+          <p class="eyebrow eyebrow-mark">Contact</p>
+          <h2 class="display-lg contact-title">お問い合わせ・資料請求</h2>
+          <p class="body contact-lead">導入のご相談、デモ見学、資料請求など、お気軽にお問い合わせください。</p>
         </div>
-        <div class="form-row">
-          <label>
-            メールアドレス <span class="required">必須</span>
-            <input type="email" name="email" placeholder="taro@example.com" required />
+        <!-- ダミーフォーム：送信処理は未実装。フォームサービス接続時に action を差し替える -->
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <label class="field">
+              <span class="body-sm field-label">お名前 <span class="req">必須</span></span>
+              <input type="text" name="name" placeholder="山田 太郎" required />
+            </label>
+            <label class="field">
+              <span class="body-sm field-label">ご所属（学校・団体・会社名）</span>
+              <input type="text" name="organization" placeholder="○○高等学校" />
+            </label>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              <span class="body-sm field-label">メールアドレス <span class="req">必須</span></span>
+              <input type="email" name="email" placeholder="taro@example.com" required />
+            </label>
+            <label class="field">
+              <span class="body-sm field-label">お問い合わせ種別</span>
+              <select name="type">
+                <option>資料請求</option>
+                <option>導入相談</option>
+                <option>デモ見学の希望</option>
+                <option>その他</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            <span class="body-sm field-label">お問い合わせ内容</span>
+            <textarea name="message" rows="5" placeholder="ご検討状況やご質問をご記入ください"></textarea>
           </label>
-          <label>
-            お問い合わせ種別
-            <select name="type">
-              <option>資料請求</option>
-              <option>導入相談</option>
-              <option>デモ見学の希望</option>
-              <option>その他</option>
-            </select>
-          </label>
-        </div>
-        <label>
-          お問い合わせ内容
-          <textarea name="message" rows="6" placeholder="ご検討状況やご質問をご記入ください"></textarea>
-        </label>
-        <p class="form-note">※ 現在このフォームは準備中のため、送信は行われません。</p>
-        <button class="btn" type="submit">送信する</button>
-      </form>
+          <p class="caption form-note">※ 現在このフォームは準備中のため、送信は行われません</p>
+          <button class="btn btn-orange" type="submit">送信する</button>
+        </form>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  // ダミーフォーム：送信を止めてメッセージだけ表示する
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -282,477 +260,329 @@ const cases = [
 </script>
 
 <style>
-  /* ---------- ヒーロー ---------- */
-  .gordix-hero {
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(120% 80% at 78% 30%, rgba(238, 119, 51, 0.16) 0%, rgba(238, 119, 51, 0) 55%),
-      linear-gradient(135deg, #1b2026 0%, #131619 55%, #0d1013 100%);
+  /* ---------- section heads ---------- */
+  .sec-head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .eyebrow-orange {
+    color: var(--gordix-orange);
+  }
+  .docs-lead {
+    max-width: 640px;
+    margin-top: 4px;
   }
 
-  /* 上端にオレンジのアクセントライン */
-  .gordix-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--green) 0%, rgba(238, 119, 51, 0) 60%);
-  }
-
-  .gordix-hero-inner {
-    position: relative;
+  /* ---------- hero (navy + orange) ---------- */
+  .hero {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
     align-items: center;
-    gap: 56px;
-    padding-block: 88px;
   }
-
-  .gordix-logo {
-    width: 168px;
+  .hero-logo {
+    width: 150px;
     height: auto;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
-
-  .gordix-badge {
-    display: inline-block;
-    font-family: var(--font-en);
-    font-size: 12px;
-    letter-spacing: 0.32em;
-    color: var(--green);
-    border: 1px solid rgba(238, 119, 51, 0.5);
-    border-radius: 3px;
-    padding: 5px 12px;
-    margin-bottom: 22px;
+  .hero-eyebrow {
+    color: var(--gordix-orange);
+    margin-bottom: 16px;
   }
-
-  .gordix-hero-title {
-    font-size: clamp(34px, 4vw, 52px);
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: 0.06em;
+  .hero-title .accent {
+    color: var(--gordix-orange);
   }
-
-  .gordix-hero-title .accent {
-    color: var(--green);
+  .hero-lead {
+    margin-top: 22px;
+    max-width: 480px;
+    color: rgba(255, 255, 255, 0.82);
   }
-
-  .gordix-hero-lead {
-    margin-top: 24px;
-    color: var(--muted);
-    max-width: 520px;
-  }
-
-  /* スペックチップ */
   .spec-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 34px;
+    gap: 12px;
+    margin-top: 30px;
   }
-
   .spec-chip {
     display: flex;
     flex-direction: column;
-    padding: 14px 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    min-width: 120px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--r-md);
+    min-width: 112px;
   }
-
   .spec-chip-value {
-    font-family: var(--font-en);
     font-size: 24px;
     font-weight: 600;
-    color: var(--green);
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
+    color: var(--gordix-orange);
   }
-
   .spec-chip-unit {
-    font-family: var(--font-en);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    margin-top: 2px;
+    margin-top: 3px;
+    opacity: 0.6;
   }
-
   .spec-chip-label {
-    font-size: 12px;
-    color: var(--ink);
     margin-top: 8px;
   }
-
-  .gordix-hero-buttons {
-    margin-top: 34px;
+  .hero-actions {
+    margin-top: 32px;
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
   }
-
-  .gordix-hero-visual {
-    position: relative;
-  }
-
-  .gordix-hero-visual img {
-    border-radius: var(--radius);
+  .hero-visual {
     aspect-ratio: 4 / 3;
-    object-fit: cover;
-    width: 100%;
-    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
   }
 
-  /* ---------- 特徴 ---------- */
+  /* ---------- features ---------- */
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 24px;
+    gap: 20px;
   }
-
-  .feature-card {
-    border: 1px solid var(--line);
+  .feature {
     position: relative;
-    overflow: hidden;
   }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--green);
+  .feature-no {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--gordix-orange);
+    margin-bottom: 14px;
   }
-
-  .feature-number {
-    font-family: var(--font-en);
-    font-size: 15px;
-    letter-spacing: 0.2em;
-    color: var(--green);
+  .feature-title {
+    font-size: 20px;
     margin-bottom: 12px;
   }
-
-  .feature-card h3 {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-
   .feature-text {
-    font-size: 13px;
-    color: var(--muted);
+    opacity: 0.72;
   }
 
-  .machine-grid {
+  .machine {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: center;
-    margin-top: 64px;
+    margin-top: 56px;
   }
-
-  .machine-grid img {
-    border-radius: var(--radius);
+  .machine-image {
     aspect-ratio: 4 / 3;
-    object-fit: cover;
-    width: 100%;
-    border: 1px solid var(--line);
   }
-
   .machine-title {
-    font-size: 19px;
-    margin-bottom: 20px;
-    padding-left: 14px;
-    border-left: 3px solid var(--green);
+    margin: 12px 0 20px;
   }
-
   .spec-list {
     margin: 0;
   }
-
   .spec-list div {
     display: grid;
     grid-template-columns: 130px 1fr;
     gap: 16px;
-    padding: 13px 4px;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
   }
-
   .spec-list dt {
-    color: var(--muted);
+    opacity: 0.6;
+    margin: 0;
   }
-
   .spec-list dd {
     margin: 0;
   }
-
   .spec-note {
-    font-size: 12px;
-    color: var(--muted);
     margin-top: 16px;
+    opacity: 0.55;
   }
 
-  /* ---------- ドキュメント ---------- */
+  /* ---------- docs ---------- */
   .doc-list {
     list-style: none;
-    margin: 32px 0 0;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
-
   .doc-item {
     display: flex;
     align-items: center;
-    gap: 22px;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 28px;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    gap: 20px;
+    padding: 22px 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    transition: border-color 0.18s ease, transform 0.18s ease;
   }
-
   .doc-item:hover {
+    border-color: var(--gordix-orange);
     transform: translateY(-2px);
-    border-color: var(--green);
   }
-
-  .doc-item .tag {
+  .doc-chip {
     flex-shrink: 0;
   }
-
-  .doc-item-main {
+  .doc-main {
     flex: 1;
     min-width: 0;
   }
-
-  .doc-item-title {
+  .doc-title {
     display: block;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-weight: 500;
   }
-
-  .doc-item-desc {
+  .doc-desc {
     display: block;
-    font-size: 12px;
-    color: var(--muted);
     margin-top: 4px;
+    opacity: 0.65;
   }
-
-  .doc-item-date {
+  .doc-date {
     flex-shrink: 0;
-    font-family: var(--font-en);
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
+    opacity: 0.6;
   }
 
-  /* ---------- 教育機関向け ---------- */
-  .edu-grid {
+  /* ---------- education (coral) ---------- */
+  .edu {
     display: grid;
-    grid-template-columns: 1fr 0.85fr;
-    gap: 56px;
-    align-items: center;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px;
   }
-
+  .edu-title {
+    margin: 18px 0 20px;
+  }
   .edu-lead {
-    color: var(--muted);
-    margin-bottom: 28px;
+    max-width: 420px;
   }
-
   .edu-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 14px;
   }
-
   .edu-list li {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--green);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 18px 24px;
-    font-size: 14px;
-    color: var(--muted);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--r-md);
+    padding: 20px 22px;
+  }
+  .edu-item-title {
+    font-size: 18px;
+    margin-bottom: 6px;
   }
 
-  .edu-list strong {
-    display: block;
-    color: var(--ink);
-    margin-bottom: 4px;
-    letter-spacing: 0.08em;
-  }
-
-  .edu-grid > img {
-    border-radius: var(--radius);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    width: 100%;
-    border: 1px solid var(--line);
-  }
-
-  /* ---------- 導入事例 ---------- */
+  /* ---------- cases ---------- */
   .case-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 24px;
+    gap: 20px;
   }
-
-  .case-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
+  .case {
+    margin: 0;
   }
-
-  .case-card img {
+  .case-thumb {
     aspect-ratio: 4 / 3;
-    object-fit: cover;
-    width: 100%;
+    margin-bottom: 14px;
   }
-
-  .case-body {
-    padding: 18px 20px 22px;
+  .case-chip {
+    align-self: flex-start;
   }
-
   .case-title {
-    font-size: 13px;
+    margin-top: 12px;
     font-weight: 500;
-    line-height: 1.8;
-    margin-top: 10px;
   }
-
   .case-date {
     display: block;
-    font-family: var(--font-en);
-    font-size: 12px;
-    color: var(--muted);
     margin-top: 10px;
-    letter-spacing: 0.08em;
+    opacity: 0.6;
   }
 
-  /* ---------- フォーム ---------- */
-  .contact-inner {
-    max-width: 760px;
+  /* ---------- contact ---------- */
+  .contact-head {
+    max-width: 640px;
+    margin-bottom: 36px;
   }
-
+  .contact-title {
+    margin: 12px 0 16px;
+  }
   .contact-form {
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 18px;
+    max-width: 760px;
   }
-
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    gap: 18px;
   }
-
-  .contact-form label {
+  .field {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    font-size: 13px;
+  }
+  .field-label {
     font-weight: 500;
-    letter-spacing: 0.08em;
   }
-
-  .required {
+  .req {
     display: inline-block;
-    background: var(--green);
+    background: var(--gordix-orange);
     color: #fff;
+    font-family: var(--font-mono);
     font-size: 10px;
-    padding: 1px 8px;
-    border-radius: 3px;
-    margin-left: 6px;
+    letter-spacing: 0.05em;
+    padding: 1px 7px;
+    border-radius: var(--r-full);
+    margin-left: 4px;
+    vertical-align: 1px;
   }
-
-  .contact-form input,
-  .contact-form select,
-  .contact-form textarea {
-    font-family: var(--font-jp);
-    font-size: 14px;
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: var(--font-sans);
+    font-size: 16px;
     padding: 12px 14px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--bg-soft);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: var(--r-md);
+    background: var(--canvas);
     color: var(--ink);
   }
-
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder {
-    color: #6b7178;
-  }
-
-  .contact-form input:focus,
-  .contact-form select:focus,
-  .contact-form textarea:focus {
-    outline: 2px solid var(--green);
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--ink);
     outline-offset: 1px;
-    border-color: var(--green);
+    border-color: var(--ink);
   }
-
   .form-note {
-    font-size: 12px;
-    color: var(--muted);
+    opacity: 0.6;
   }
-
   .contact-form .btn {
     align-self: flex-start;
   }
 
-  /* ---------- レスポンシブ ---------- */
+  /* ---------- responsive ---------- */
   @media (max-width: 960px) {
-    .gordix-hero-inner {
-      grid-template-columns: 1fr;
-      padding-block: 56px;
-    }
-
-    .feature-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .machine-grid,
-    .edu-grid {
+    .hero,
+    .machine,
+    .edu {
       grid-template-columns: 1fr;
       gap: 32px;
     }
-
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
     .case-grid {
       grid-template-columns: 1fr;
     }
-
     .doc-item {
       flex-wrap: wrap;
       gap: 12px;
     }
-
-    .doc-item-main {
+    .doc-main {
       flex-basis: 100%;
       order: 3;
     }
-
     .form-row {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .spec-chip {
-      flex: 1;
-      min-width: 0;
     }
   }
 </style>

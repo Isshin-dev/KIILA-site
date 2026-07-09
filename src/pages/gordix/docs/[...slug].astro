@@ -21,14 +21,14 @@ const categoryLabel: Record<string, string> = {
 };
 ---
 
-<BaseLayout theme="dark" title={`${doc.data.title}｜GORDIX ドキュメント - KIILA株式会社`} description={doc.data.description}>
+<BaseLayout title={`${doc.data.title}｜GORDIX ドキュメント - KIILA株式会社`} description={doc.data.description}>
   <article class="section">
     <div class="container doc-container">
-      <a class="doc-back" href={withBase('/gordix/#docs')}>← ドキュメント一覧へ戻る</a>
+      <a class="doc-back link-underline" href={withBase('/gordix/#docs')}>← ドキュメント一覧へ戻る</a>
       <header class="doc-header">
-        <span class="tag tag-green">{categoryLabel[doc.data.category]}</span>
-        <h1>{doc.data.title}</h1>
-        <time>{formatDate(doc.data.date)}</time>
+        <span class="chip">{categoryLabel[doc.data.category]}</span>
+        <h1 class="display-lg doc-title">{doc.data.title}</h1>
+        <time class="caption doc-date">{formatDate(doc.data.date)}</time>
       </header>
       <div class="prose">
         <Content />
@@ -43,36 +43,21 @@ const categoryLabel: Record<string, string> = {
   }
 
   .doc-back {
-    font-size: 13px;
-    color: var(--green);
-    letter-spacing: 0.08em;
-  }
-
-  .doc-back:hover {
-    text-decoration: underline;
+    display: inline-block;
+    font-size: 16px;
   }
 
   .doc-header {
     margin: 28px 0 40px;
     padding-bottom: 28px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--hairline);
   }
 
-  .doc-header h1 {
-    font-size: 28px;
-    margin: 16px 0 12px;
+  .doc-title {
+    margin: 20px 0 14px;
   }
 
-  .doc-header time {
-    font-family: var(--font-en);
-    font-size: 13px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-
-  @media (max-width: 768px) {
-    .doc-header h1 {
-      font-size: 22px;
-    }
+  .doc-date {
+    opacity: 0.6;
   }
 </style>

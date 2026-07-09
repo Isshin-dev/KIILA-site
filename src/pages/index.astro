@@ -3,94 +3,75 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../lib/paths';
 
 const values = [
-  {
-    label: 'Mission',
-    text: '森の価値を最大化し、人の暮らしと産業に新しい価値を生み出す。',
-  },
-  {
-    label: 'Vision',
-    text: '木とテクノロジーが当たり前に共存する豊かな未来をつくる。',
-  },
-  {
-    label: 'Value',
-    text: '誠実に、つくることに向き合い、ひと・自然・技術のつながりを育む事業を続ける。',
-  },
+  { label: 'Mission', text: '森の価値を最大化し、人の暮らしと産業に新しい価値を生み出す。' },
+  { label: 'Vision', text: '木とテクノロジーが当たり前に共存する、豊かな未来をつくる。' },
+  { label: 'Value', text: '誠実に、つくることに向き合い、ひと・自然・技術のつながりを育む。' },
 ];
 
 // お知らせはダミー。正式運用時に差し替え
 const news = [
-  {
-    date: '2026.06.20',
-    tag: 'MOKURI',
-    title: '新作木製タイル「MORI」シリーズを追加しました',
-    image: withBase('/images/kiila/news-01.png'),
-  },
-  {
-    date: '2026.06.02',
-    tag: 'GORDIX',
-    title: 'GORDIX導入セミナー（東京）開催レポート',
-    image: withBase('/images/kiila/news-02.png'),
-  },
-  {
-    date: '2026.05.24',
-    tag: 'MOKURI',
-    title: '展示施設向け事例を3件追加しました',
-    image: withBase('/images/kiila/news-03.png'),
-  },
-  {
-    date: '2026.05.10',
-    tag: 'お知らせ',
-    title: 'KIILA株式会社 コーポレートサイトを公開しました',
-    image: withBase('/images/kiila/news-04.png'),
-  },
+  { date: '2026.06.20', tag: 'MOKURI', title: '新作木製タイル「MORI」シリーズを追加しました', image: withBase('/images/kiila/news-01.png') },
+  { date: '2026.06.02', tag: 'GORDIX', title: 'GORDIX導入セミナー（東京）開催レポート', image: withBase('/images/kiila/news-02.png') },
+  { date: '2026.05.24', tag: 'MOKURI', title: '展示施設向け事例を3件追加しました', image: withBase('/images/kiila/news-03.png') },
+  { date: '2026.05.10', tag: 'NEWS', title: 'KIILA株式会社 コーポレートサイトを公開しました', image: withBase('/images/kiila/news-04.png') },
+];
+
+const marquee = [
+  'MOKURI — CUSTOM WOOD TILE',
+  'GORDIX — 3-IN-1 PORTABLE CNC',
+  "KIILA = FINNISH FOR ‘WEDGE’",
+  '森と技術をつなぐ',
 ];
 ---
 
-<BaseLayout title="KIILA株式会社｜木の可能性で、空間と未来をデザインする">
+<BaseLayout title="KIILA株式会社｜常識に楔を、木と技術で未来を組み直す">
   <!-- ヒーロー -->
-  <section class="hero">
-    <div class="container hero-inner">
+  <section class="section hero">
+    <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="hero-eyebrow">KIILA — フィンランド語で「楔（くさび）」</p>
-        <h1 class="hero-title">
-          常識に、<span>楔</span>を。<br />
-          木と技術で、<span>未来</span>を組み直す。
-        </h1>
-        <p class="hero-lead">
+        <p class="eyebrow eyebrow-mark">KIILA — Finnish for “Wedge”</p>
+        <h1 class="display-xl hero-title">常識に、楔を。<br />木と技術で、<br />未来を組み直す。</h1>
+        <p class="body-lg hero-lead">
           KIILA株式会社は、既存の概念に楔を打ち込み、新しいものを組み立て直す会社です。
           カスタム木製タイルブランド「MOKURI」と、CNCルーター「GORDIX」の普及を通じて、
           人と森、デザインと技術をつなぐ未来をつくります。
         </p>
-        <div class="hero-buttons">
-          <a class="btn" href={withBase('/mokuri/')}>MOKURIを見る</a>
-          <a class="btn btn-outline" href={withBase('/gordix/')}>GORDIXを見る</a>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={withBase('/mokuri/')}>MOKURIを見る</a>
+          <a class="btn btn-secondary" href={withBase('/gordix/')}>GORDIXを見る</a>
         </div>
       </div>
-      <div class="hero-visual">
+      <div class="hero-visual frame">
         <img src={withBase('/images/kiila/hero-main.png')} alt="CNCルーターによる木材加工" />
-        <img class="hero-visual-sub" src={withBase('/images/kiila/hero-sub.png')} alt="木製タイルの壁面" />
       </div>
     </div>
   </section>
 
+  <!-- マーキー -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {marquee.map((m) => <span>{m}</span>)}
+      {marquee.map((m) => <span>{m}</span>)}
+    </div>
+  </div>
+
   <!-- 会社概要 -->
   <section class="section" id="about">
-    <div class="container about-grid">
-      <div>
-        <p class="section-eyebrow">About</p>
-        <h2 class="section-title">KIILA株式会社について</h2>
-        <p class="section-lead">
-          KIILAはフィンランド語で「楔」。硬い丸太も、正しい一点に楔を打てば割り開くことができます。
-          私たちは、自然の恵みである「木」と、進化する「技術」を掛け合わせることで、
-          持続可能で心地よい社会をつくります。
-        </p>
+    <div class="container">
+      <div class="about-head">
+        <p class="eyebrow">About</p>
+        <h2 class="display-lg">KIILA株式会社について</h2>
       </div>
-      <div class="value-cards">
+      <p class="subhead about-lead">
+        KIILAはフィンランド語で「楔」。硬い丸太も、正しい一点に楔を打てば割り開くことができます。
+        私たちは、自然の恵みである「木」と、進化する「技術」を掛け合わせ、持続可能で心地よい社会をつくります。
+      </p>
+      <div class="values">
         {
           values.map((v) => (
-            <div class="card value-card">
-              <p class="value-label">{v.label}</p>
-              <p class="value-text">{v.text}</p>
+            <div class="value">
+              <p class="eyebrow value-label">{v.label}</p>
+              <p class="body value-text">{v.text}</p>
             </div>
           ))
         }
@@ -98,35 +79,41 @@ const news = [
     </div>
   </section>
 
-  <!-- 2つの事業 -->
-  <section class="section section-alt" id="business">
+  <!-- 事業A: MOKURI（cream color-block） -->
+  <section class="section-tight" id="business">
     <div class="container">
-      <p class="section-eyebrow">Business</p>
-      <h2 class="section-title">2つの事業</h2>
-      <div class="business-grid">
-        <div class="business-card">
-          <img src={withBase('/images/kiila/business-mokuri.png')} alt="MOKURIの木製タイル" />
-          <div class="business-body">
-            <span class="tag tag-green">事業A</span>
-            <h3>MOKURI — カスタム木製タイルブランド</h3>
-            <p>
-              木の美しさと、デザインの自由度を。
-              空間に合わせたオリジナルの木製タイルを、一枚から企画・設計・製作します。
-            </p>
-            <a class="btn" href={withBase('/mokuri/')}>MOKURIを見る</a>
-          </div>
+      <div class="color-block block-cream biz">
+        <div class="biz-copy">
+          <p class="eyebrow eyebrow-mark">事業A — MOKURI</p>
+          <h3 class="display-lg biz-title">木の表情を、<br />空間の主役に。</h3>
+          <p class="body biz-text">
+            木の美しさと、デザインの自由度を。空間に合わせたオリジナルの木製タイルを、
+            一枚から企画・設計・製作するカスタムメイドブランドです。
+          </p>
+          <a class="btn btn-primary" href={withBase('/mokuri/')}>MOKURIを見る</a>
         </div>
-        <div class="business-card">
+        <div class="biz-visual frame">
+          <img src={withBase('/images/kiila/business-mokuri.png')} alt="MOKURIの木製タイル" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 事業B: GORDIX（navy color-block） -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="color-block block-navy biz">
+        <div class="biz-copy">
+          <p class="eyebrow eyebrow-mark">事業B — GORDIX</p>
+          <h3 class="display-lg biz-title">削るを、<br />みんなのものに。</h3>
+          <p class="body biz-text">
+            CNCルーター「GORDIX」の導入支援と、ノウハウ・コミュニティ運営を通じて、
+            教育機関を中心にデジタルものづくりの可能性を広げます。
+          </p>
+          <a class="btn btn-white" href={withBase('/gordix/')}>GORDIXを見る</a>
+        </div>
+        <div class="biz-visual frame">
           <img src={withBase('/images/kiila/business-gordix.png')} alt="CNCルーターGORDIX" />
-          <div class="business-body">
-            <span class="tag tag-green">事業B</span>
-            <h3>GORDIX普及事業</h3>
-            <p>
-              CNCルーター「GORDIX」の導入支援と、使いこなしのためのドキュメント・コミュニティ運営を通じて、
-              教育機関を中心にデジタルものづくりの可能性を広げます。
-            </p>
-            <a class="btn" href={withBase('/gordix/')}>GORDIXを見る</a>
-          </div>
         </div>
       </div>
     </div>
@@ -137,271 +124,183 @@ const news = [
     <div class="container">
       <div class="news-head">
         <div>
-          <p class="section-eyebrow">News</p>
-          <h2 class="section-title">お知らせ</h2>
+          <p class="eyebrow">News</p>
+          <h2 class="display-lg">お知らせ</h2>
         </div>
-        <a class="news-more" href="#news">お知らせ一覧 →</a>
+        <a class="link-underline" href="#news">お知らせ一覧</a>
       </div>
       <div class="news-grid">
         {
           news.map((item) => (
-            <article class="news-card">
-              <img src={item.image} alt="" />
-              <div class="news-body">
-                <span class="tag">{item.tag}</span>
-                <p class="news-title">{item.title}</p>
-                <time class="news-date">{item.date}</time>
+            <a class="news-card tile" href="#news">
+              <div class="news-thumb frame">
+                <img src={item.image} alt="" />
               </div>
-            </article>
+              <span class="chip news-chip">{item.tag}</span>
+              <p class="body-sm news-title">{item.title}</p>
+              <time class="caption news-date">{item.date}</time>
+            </a>
           ))
         }
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-band">
-    <div class="container cta-band-inner">
-      <p class="cta-band-text">
-        森と技術で、あなたの想いをかたちにします。<br />
-        まずはお気軽にご相談ください。
-      </p>
-      <div class="cta-band-buttons">
-        <a class="btn btn-white" href={withBase('/mokuri/')}>MOKURIについて相談する</a>
-        <a class="btn btn-white-outline" href={withBase('/gordix/#contact')}>GORDIXについて相談する</a>
+  <!-- クロージングCTA（lime color-block） -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="color-block block-lime cta">
+        <h2 class="display-lg cta-title">森と技術で、<br />あなたの想いをかたちに。</h2>
+        <p class="subhead cta-lead">まずはお気軽にご相談ください。</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href={withBase('/mokuri/')}>MOKURIを相談する</a>
+          <a class="btn btn-secondary" href={withBase('/gordix/#contact')}>GORDIXを相談する</a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* ---------- ヒーロー ---------- */
-  .hero {
-    background: linear-gradient(135deg, #fdfcf9 0%, var(--bg) 60%, var(--bg-soft) 100%);
-    overflow: hidden;
-  }
-
-  .hero-inner {
+  /* ---------- hero ---------- */
+  .hero-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
     gap: 56px;
-    padding-block: 88px;
   }
-
-  .hero-eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    color: var(--green);
-    margin-bottom: 20px;
-  }
-
   .hero-title {
-    font-size: clamp(30px, 3.2vw, 40px);
-    font-weight: 700;
-    line-height: 1.6;
-    letter-spacing: 0.06em;
+    margin-top: 24px;
   }
-
-  .hero-title span {
-    color: var(--green);
-  }
-
   .hero-lead {
     margin-top: 28px;
-    color: var(--muted);
     max-width: 520px;
   }
-
-  .hero-buttons {
+  .hero-actions {
     margin-top: 36px;
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
   }
-
   .hero-visual {
-    position: relative;
-  }
-
-  .hero-visual > img:first-child {
-    border-radius: var(--radius);
     aspect-ratio: 4 / 3;
-    object-fit: cover;
-    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
   }
 
-  .hero-visual-sub {
-    position: absolute;
-    left: -36px;
-    bottom: -40px;
-    width: 38%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    border-radius: var(--radius);
-    border: 6px solid #fff;
-    box-shadow: 0 10px 30px rgba(38, 36, 31, 0.15);
+  /* ---------- about ---------- */
+  .about-head {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
-
-  /* ---------- 会社概要 ---------- */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 56px;
-    align-items: start;
+  .about-lead {
+    max-width: 780px;
+    margin: 32px 0 56px;
   }
-
-  .value-cards {
+  .values {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 40px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 40px;
   }
-
   .value-label {
-    font-family: var(--font-en);
-    font-size: 19px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--green);
     margin-bottom: 14px;
   }
 
-  .value-text {
-    font-size: 14px;
-    color: var(--ink);
-  }
-
-  /* ---------- 事業 ---------- */
-  .business-grid {
+  /* ---------- business color blocks ---------- */
+  .biz {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    margin-top: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .biz-title {
+    margin: 20px 0 20px;
+  }
+  .biz-text {
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+  .biz-visual {
+    aspect-ratio: 4 / 3;
   }
 
-  .business-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .business-card > img {
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    width: 100%;
-  }
-
-  .business-body {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    flex: 1;
-  }
-
-  .business-body h3 {
-    font-size: 21px;
-  }
-
-  .business-body p {
-    color: var(--muted);
-    font-size: 14px;
-    flex: 1;
-  }
-
-  /* ---------- お知らせ ---------- */
+  /* ---------- news ---------- */
   .news-head {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     gap: 24px;
+    margin-bottom: 40px;
   }
-
-  .news-more {
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    color: var(--green);
-    padding-bottom: 28px;
+  .news-head .display-lg {
+    margin-top: 12px;
   }
-
   .news-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
-
   .news-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(38, 36, 31, 0.06);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s ease;
   }
-
-  .news-card img {
+  .news-card:hover {
+    transform: translateY(-3px);
+  }
+  .news-thumb {
     aspect-ratio: 4 / 3;
-    object-fit: cover;
-    width: 100%;
+    margin-bottom: 16px;
   }
-
-  .news-body {
-    padding: 18px 18px 22px;
+  .news-chip {
+    align-self: flex-start;
   }
-
   .news-title {
-    font-size: 13px;
+    margin-top: 12px;
     font-weight: 500;
-    line-height: 1.8;
-    margin-top: 10px;
   }
-
   .news-date {
-    display: block;
-    font-family: var(--font-en);
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 10px;
-    letter-spacing: 0.08em;
+    margin-top: 12px;
+    opacity: 0.6;
   }
 
-  /* ---------- レスポンシブ ---------- */
+  /* ---------- closing cta ---------- */
+  .cta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta-lead {
+    margin: 20px 0 32px;
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  /* ---------- responsive ---------- */
   @media (max-width: 960px) {
-    .hero-inner {
+    .hero-grid {
       grid-template-columns: 1fr;
-      padding-block: 56px;
+      gap: 36px;
     }
-
-    .hero-title {
-      font-size: 32px;
+    .values {
+      grid-template-columns: 1fr;
+      gap: 28px;
     }
-
-    .hero-visual-sub {
-      left: -12px;
-      bottom: -24px;
-    }
-
-    .about-grid {
+    .biz {
       grid-template-columns: 1fr;
       gap: 32px;
     }
-
-    .value-cards {
-      grid-template-columns: 1fr;
-    }
-
-    .business-grid {
-      grid-template-columns: 1fr;
-    }
-
     .news-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-
-  @media (max-width: 560px) {
+  @media (max-width: 520px) {
     .news-grid {
       grid-template-columns: 1fr;
     }

@@ -1,87 +1,139 @@
 ---
 import { withBase } from '../lib/paths';
 
-const nav = [
-  { href: withBase('/#about'), label: '事業概要' },
-  { href: withBase('/mokuri/'), label: 'MOKURI' },
-  { href: withBase('/gordix/'), label: 'GORDIX' },
-  { href: withBase('/#news'), label: 'お知らせ' },
+const columns = [
+  {
+    head: 'Business',
+    links: [
+      { href: withBase('/mokuri/'), label: 'MOKURI（木製タイル）' },
+      { href: withBase('/gordix/'), label: 'GORDIX（CNC）' },
+      { href: withBase('/gordix/#docs'), label: 'ドキュメント' },
+    ],
+  },
+  {
+    head: 'Company',
+    links: [
+      { href: withBase('/#about'), label: '事業概要' },
+      { href: withBase('/#news'), label: 'お知らせ' },
+      { href: withBase('/gordix/#contact'), label: 'お問い合わせ' },
+    ],
+  },
+  {
+    head: 'Contact',
+    links: [
+      { href: 'mailto:info@kiila.co.jp', label: 'info@kiila.co.jp' },
+      { href: 'tel:03-1234-5678', label: 'TEL 03-1234-5678' },
+    ],
+  },
 ];
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div class="footer-company">
-      <p class="footer-logo">KIILA</p>
-      <p class="footer-company-name">KIILA株式会社</p>
-      <!-- ↓住所・連絡先はダミー。正式決定後に差し替え -->
-      <p class="footer-address">
-        〒150-0002 東京都渋谷区渋谷1-2-3 渋谷第一ビル 5F<br />
-        TEL 03-1234-5678　MAIL info@kiila.co.jp
+    <div class="footer-lead">
+      <p class="footer-wordmark">KIILA</p>
+      <p class="footer-tagline body-sm">既存に楔を、木と技術で未来を組み直す。</p>
+      <!-- 住所・連絡先はダミー。正式決定後に差し替え -->
+      <p class="footer-address caption">
+        〒150-0002 東京都渋谷区渋谷1-2-3 渋谷第一ビル 5F
       </p>
     </div>
-    <nav class="footer-nav">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-      <a href="#">プライバシーポリシー</a>
-    </nav>
+
+    <div class="footer-cols">
+      {
+        columns.map((col) => (
+          <div class="footer-col">
+            <p class="caption footer-col-head">{col.head}</p>
+            {col.links.map((l) => (
+              <a class="body-sm footer-link" href={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
   </div>
-  <p class="copyright">© 2026 KIILA Co., Ltd. All Rights Reserved.</p>
+
+  <div class="container footer-base">
+    <p class="caption">© 2026 KIILA Co., Ltd.</p>
+    <a class="caption" href="#">Privacy Policy</a>
+  </div>
 </footer>
 
 <style>
   .site-footer {
-    background: var(--surface);
-    border-top: 1px solid var(--line);
-    padding-top: 64px;
+    background: var(--canvas);
+    border-top: 1px solid var(--hairline);
+    padding-top: var(--s-section);
   }
 
   .footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 48px;
+    padding-bottom: 56px;
   }
 
-  .footer-logo {
-    font-family: var(--font-en);
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    color: var(--ink);
+  .footer-wordmark {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
   }
 
-  .footer-company-name {
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    margin-top: 6px;
+  .footer-tagline {
+    margin-top: 12px;
   }
 
   .footer-address {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 14px;
-    line-height: 2.1;
+    margin-top: 20px;
+    line-height: 1.6;
   }
 
-  .footer-nav {
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .footer-col {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 28px;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    padding-top: 10px;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .footer-nav a:hover {
-    color: var(--green);
+  .footer-col-head {
+    margin-bottom: 4px;
+    color: var(--ink);
+    opacity: 0.55;
   }
 
-  .copyright {
-    text-align: center;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    padding: 40px 24px 28px;
+  .footer-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .footer-base {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 24px;
+    border-top: 1px solid var(--hairline-soft);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .footer-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-cols {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

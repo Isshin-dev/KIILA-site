@@ -6,4 +6,8 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://isshin-dev.github.io',
   base: '/KIILA-site',
+  markdown: {
+    // 編集的なモノクロ基調に合わせ、コードブロックは明るいテーマで表示
+    shikiConfig: { theme: 'github-light' },
+  },
 });
