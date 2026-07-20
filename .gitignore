@@ -3,3 +3,5 @@ dist/
 .astro/
 .DS_Store
 npm-debug.log*
+public/tile-generator/
+public/tile-generator/api/order-config.php

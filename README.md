@@ -49,32 +49,21 @@ date: 2026-07-01
 
 スキーマ定義は `src/content.config.ts` にあります（Astro v5の仕様で、設定ファイルは `src/content/config.ts` ではなく `src/` 直下に置きます）。
 
-## デプロイ（GitHub Pages）
+## Xserver へのデプロイ
 
-`main` ブランチへpushすると、GitHub Actions（`.github/workflows/deploy.yml`）が自動でビルドしてGitHub Pagesへデプロイします。
+このサイトは独自ドメインのルート（`https://example.com/`）で配信する設定です。GitHub Pages には依存しません。
 
-初回のみ以下の設定が必要です：
+1. ローカルで `npm ci && npm run build` を実行する（タイル生成アプリも自動でビルドされます）
+2. `dist/` の中身を Xserver の対象ドメインの `public_html/` へアップロードする
+3. `dist/tile-generator/api/order-config.example.php` を `order-config.php` に複製し、`recipient`（工房の受信先）と `from`（同一ドメインの送信元）を実在するメールアドレスへ変更する
 
-1. GitHubに `KIILA-site` という名前でリポジトリを作成してpush
-2. リポジトリの **Settings → Pages → Source** を **「GitHub Actions」** に変更
+公開後の主なURLは `/mokuri/` と `/tile-generator/` です。内部リンクと画像はURL変更後もルート基準で解決します。
 
-公開URL: `https://isshin-dev.github.io/KIILA-site/`
+## MOKURI タイル生成・見積もり依頼
 
-## Xサーバー等へ移行する場合
+タイル生成アプリはリポジトリ内の `tile-generator/` に同梱され、ビルド時に `/tile-generator/` としてKIILAサイト内へ出力されます。外部の GitHub Pages や iframe のクロスドメイン参照は使いません。
 
-1. `astro.config.mjs` の `site` を独自ドメインに変更し、`base: '/KIILA-site'` の行を削除
-2. `npm run build` して `dist/` の中身をサーバーにアップロード
-
-内部リンク・画像パスはすべて `src/lib/paths.ts` の `withBase()` 経由なので、設定変更だけで追従します。
-
-## ECサイト（MOKURI）への導線について
-
-MOKURIページには、稼働中のオーダータイル設計ツール（https://isshin-dev.github.io/woodtile_ec/）への導線を**2種類**実装しています：
-
-1. **別タブで開くボタン**（「設計ツールを開く」）
-2. **ページ内iframe埋め込み**
-
-どちらかに絞る場合は、`src/pages/mokuri/index.astro` の該当ブロック（コメントで明示してあります）を削除してください。
+「データを送って見積もり依頼」では、入力条件と SVG・DXF の設計データを `tile-generator/api/tile-order.php` 経由で工房へメール送信します。PHPの送信先設定を必ず完了してから公開してください。
 
 ## 主な構成
 

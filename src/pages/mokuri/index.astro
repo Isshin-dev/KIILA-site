@@ -2,7 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/paths';
 
-const EC_URL = 'https://isshin-dev.github.io/woodtile_ec/';
+// タイル設計ツールは同じ Xserver 上で配信する。外部 GitHub Pages には依存しない。
+const EC_URL = withBase('/tile-generator/');
 
 const products = [
   { name: '市松', desc: '杉柾目・オイル仕上げ', image: withBase('/images/mokuri/product-01.png') },
@@ -78,7 +79,7 @@ const products = [
     </div>
   </section>
 
-  <!-- ECサイトへの導線（ボタン＝別タブ遷移） -->
+  <!-- オーダータイル設計ツール（同一サイト内で配信） -->
   <section class="section" id="order">
     <div class="container order-intro">
       <p class="section-eyebrow">Order</p>
@@ -87,15 +88,11 @@ const products = [
         オーダータイル設計ツールで、パターンやサイズを選びながら
         オリジナルの木製タイルをその場で設計・注文できます。
       </p>
-      <a class="btn btn-large" href={EC_URL} target="_blank" rel="noopener noreferrer">
-        設計ツールを開く（別タブ）
+      <a class="btn btn-large" href={EC_URL}>
+        設計ツールを開く
       </a>
     </div>
 
-    <!--
-      ECサイトへの導線は「別タブで開くボタン（上）」と「iframe埋め込み（下）」の
-      両方を実装してある。どちらかに絞る場合は不要な方のブロックを削除する。
-    -->
     <div class="container order-embed">
       <p class="order-embed-note">▼ ページ内でそのまま試すこともできます</p>
       <iframe
@@ -114,7 +111,7 @@ const products = [
         図面がなくても、イメージの段階からご一緒します。
       </p>
       <div class="cta-band-buttons">
-        <a class="btn btn-white" href={EC_URL} target="_blank" rel="noopener noreferrer">設計ツールで注文する</a>
+        <a class="btn btn-white" href={EC_URL}>設計ツールで注文する</a>
         <a class="btn btn-white-outline" href={withBase('/gordix/#contact')}>問い合わせる</a>
       </div>
     </div>
